@@ -15,10 +15,6 @@ def access_siga(username, password):
         login = session.post(login_page.url, data=siga_utils.get_login_post_data(
             username, password, login_page))
 
-        if(login.status_code == 500):
-            print("foi")
-            return None
-
         siga_response = session.get(portal_uri + "/Portal/auth.seam")
 
         return siga_response.cookies
@@ -48,7 +44,7 @@ def download_documents(cookies, doc_type, pdf_folder_path):
                                     session, doc_type),
                                 allow_redirects=False)
 
-        pdf_path = pdf_folder_path + doc_type + ".pdf"
+        pdf_path = pdf_folder_path + "/" + doc_type + ".pdf"
         pdf_utils.save_document(session.get(
             document._next.url).content, pdf_path)
 
@@ -60,10 +56,8 @@ def get_document_from_siga(login, password, username, doc_type):
     pdf_utils.create_directory(directory_name)
 
     cookies = access_siga(login, password)
-    if(cookies is None):
-        return ""
 
     access_documents_page(cookies)
     download_documents(cookies, doc_type, directory_name)
 
-    return directory_name + '/' + doc_type + '.pdf'
+    return directory_name + "/" + doc_type + '.pdf'
