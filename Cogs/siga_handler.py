@@ -2,7 +2,7 @@ from datetime import datetime
 
 import discord
 from discord.ext import commands
-from Program.SharedLibrary import *
+from SharedLibrary import *
 
 import siga_core
 
