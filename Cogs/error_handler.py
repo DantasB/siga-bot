@@ -1,9 +1,8 @@
-import discord
-import traceback
 import math
+import traceback
 
+import discord
 from discord.ext import commands
-from importlib.machinery import SourceFileLoader
 from Utils import discord_utils
 
 

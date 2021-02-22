@@ -1,9 +1,6 @@
 import requests
 
-from importlib.machinery import SourceFileLoader
-from Utils import siga_utils
-from Utils import pdf_utils
-
+from Utils import pdf_utils, siga_utils
 
 portal_uri = "https://gnosys.ufrj.br"
 

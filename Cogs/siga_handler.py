@@ -1,9 +1,8 @@
+from datetime import datetime
+
 import discord
 import siga_core
-
-from datetime import datetime
 from discord.ext import commands
-from importlib.machinery import SourceFileLoader
 from Utils import *
 
 

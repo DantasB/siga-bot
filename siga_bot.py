@@ -1,12 +1,13 @@
 import os
-import time
-import siga_core
-import discord
 import pathlib
-from Utils import *
-
+import time
 from datetime import datetime
+
+import discord
 from discord.ext import commands
+
+import siga_core
+from Utils import *
 
 bot = commands.Bot(command_prefix=os.getenv('PREFIX'), help_command=None)
 
