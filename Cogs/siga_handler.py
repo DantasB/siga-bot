@@ -46,12 +46,12 @@ class SigaHandler(commands.Cog):
                                                                                        self.bot.user.name,
                                                                                        datetime.now().strftime("%Y")))
 
-            embed.add_field(name="📖**Exemplos:**", value="$document 37584937063 batata234 crid\n$documento 81709558075 gshBgjds123 boletim",
+            embed.add_field(name="📖**Exemplos:**", value="!document 37584937063 batata234 crid\n!documento 81709558075 gshBgjds123 boletim",
                             inline=False)
             embed.add_field(name="📜**Lista de documentos:**", value="historico, boletim, boa, crid, bolsista, cotista, regularmente_matriculado, declaracao_passe_livre.",
                             inline=False)
             embed.add_field(name="🔀**Outros Comandos**",
-                            value="``$documento``", inline=False)
+                            value="``!documento``", inline=False)
 
             msg = await ctx.send(embed=embed)
             await msg.add_reaction("❓")
@@ -70,12 +70,12 @@ class SigaHandler(commands.Cog):
                                                                                        self.bot.user.name,
                                                                                        datetime.now().strftime("%Y")))
 
-            embed.add_field(name="📖**Exemplos:**", value="$document 37584937063 batata234 crid\n$documento 81709558075 gshBgjds123 boletim",
+            embed.add_field(name="📖**Exemplos:**", value="!document 37584937063 batata234 crid\n!documento 81709558075 gshBgjds123 boletim",
                             inline=False)
             embed.add_field(name="📜**Lista de documentos:**", value="historico, boletim, boa, crid, bolsista, cotista, regularmente_matriculado, declaracao_passe_livre.",
                             inline=False)
             embed.add_field(name="🔀**Outros Comandos**",
-                            value="``$documento``", inline=False)
+                            value="``!documento``", inline=False)
 
             msg = await ctx.send(embed=embed)
             await msg.add_reaction("❓")
@@ -92,12 +92,12 @@ class SigaHandler(commands.Cog):
                              text="Usado às {} Horário de Brasília | © {} {} .".format(datetime.now().strftime("%H:%M"),
                                                                                        self.bot.user.name,
                                                                                        datetime.now().strftime("%Y")))
-            embed.add_field(name="📖**Exemplos:**", value="$document 37584937063 batata234 crid\n$documento 81709558075 gshBgjds123 boletim",
+            embed.add_field(name="📖**Exemplos:**", value="!document 37584937063 batata234 crid\n!documento 81709558075 gshBgjds123 boletim",
                             inline=False)
             embed.add_field(name="📜**Lista de documentos:**", value="historico, boletim, boa, crid, bolsista, cotista, regularmente_matriculado, declaracao_passe_livre.",
                             inline=False)
             embed.add_field(name="🔀**Outros Comandos**",
-                            value="``$documento``", inline=False)
+                            value="``!documento``", inline=False)
 
             msg = await ctx.send(embed=embed)
             await msg.add_reaction("❓")
