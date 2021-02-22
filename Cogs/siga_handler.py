@@ -19,7 +19,7 @@ class SigaHandler(commands.Cog):
 
         file_path = siga_core.get_document_from_siga(
             login, password, str(ctx.author), doc_type.lower())
-
+        print(file_path)
         if not pdf_utils.is_pdf(file_path):
             raise commands.CheckFailure
 

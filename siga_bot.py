@@ -6,9 +6,11 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
+from Cogs import *
 from SharedLibrary import *
 
 bot = commands.Bot(command_prefix=os.getenv('PREFIX'), help_command=None)
+requirements = ["error_handler", "siga_handler"]
 
 
 @bot.command(name='help', aliases=['h', 'ajuda'])
@@ -28,11 +30,9 @@ async def help(ctx):
 
 
 if __name__ == '__main__':
-    for cog_file in pathlib.Path('Cogs').glob('*.py'):
+    for cog_file in requirements:
         try:
-            cog_file = str(cog_file).replace(".py", "")
-            cog_file = str(cog_file).replace("/", ".")
-            bot.load_extension(cog_file)
+            bot.load_extension("Cogs." + cog_file)
         except Exception as ex:
             exception = '{}: {}'.format(type(ex).__name__, ex)
             print('Falha ao carregar a extensão {}\n{}'.format(cog_file, exception))

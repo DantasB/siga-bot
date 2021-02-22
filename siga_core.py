@@ -55,7 +55,7 @@ def download_documents(cookies, doc_type, pdf_folder_path):
 
 def get_document_from_siga(login, password, username, doc_type):
 
-    directory_name = "Documents/" + username + "/"
+    directory_name = "Documents/" + username
 
     pdf_utils.create_directory(directory_name)
 
@@ -67,6 +67,3 @@ def get_document_from_siga(login, password, username, doc_type):
     download_documents(cookies, doc_type, directory_name)
 
     return directory_name + '/' + doc_type + '.pdf'
-
-
-get_document_from_siga("13429384702", "8778Bruno", "Bruno Dantas", "crid")
