@@ -1,4 +1,4 @@
- # DiscordBot.py
+ # SigaBot.py
 
 A simple Discord bot constructed using Python3 and some other libraries made by Bruno Dantas.
 
