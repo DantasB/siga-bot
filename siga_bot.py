@@ -14,7 +14,7 @@ discord_utils = SourceFileLoader(
     "discord_utils", "Utils/discord_utils.py").load_module()
 
 
-bot = commands.Bot(command_prefix='!', help_command=None)
+bot = commands.Bot(command_prefix=os.getenv('PREFIX'), help_command=None)
 
 
 @bot.command(name='help', aliases=['h', 'ajuda'])
