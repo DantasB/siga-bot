@@ -1,7 +1,5 @@
 import requests
 
-from Utils import pdf_utils, siga_utils
-
 portal_uri = "https://gnosys.ufrj.br"
 
 

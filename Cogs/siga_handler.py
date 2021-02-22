@@ -1,7 +1,6 @@
 from datetime import datetime
 
 import discord
-import siga_core
 from discord.ext import commands
 from Utils import *
 
