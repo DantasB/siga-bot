@@ -1,4 +1,5 @@
 import requests
+import aiohttp
 
 from SharedLibrary import pdf_utils
 from SharedLibrary import siga_utils
@@ -24,18 +25,20 @@ def access_siga(username, password):
         return siga_response.cookies
 
 
-def access_documents_page(cookies):
-    with requests.Session() as session:
+async def access_documents_page(cookies):
+    async with aiohttp.ClientSession(
         # Set session cookies with the ones obtained in `login_to_siga`
-        session.cookies = cookies
+        cookies=cookies) as session:
+
         # Go to the page just to wait for the redirect request
-        session.get(portal_uri + "/Documentos")
+        await session.get(portal_uri + "/Documentos")
         # Going here with the appropriate cookies return the desired page
-        resp = session.get(portal_uri + "/Documentos/auth.seam")
+        resp = await session.get(portal_uri + "/Documentos/auth.seam")
 
         # We return the raw HTML of the page containing all the pdfs
         # Reverse engineering is needed to select specific pdfs (it uses js to lazy load)
-        return resp.content.decode("utf-8")
+        resp_content = await resp.read()
+        return resp_content.decode("utf-8")
 
 
 def download_documents(cookies, doc_type, pdf_folder_path):
