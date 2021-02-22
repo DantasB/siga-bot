@@ -1,7 +1,4 @@
 from difflib import SequenceMatcher
-from importlib.machinery import SourceFileLoader
-pdf_utils = SourceFileLoader("pdf_utils", "Utils/pdf_utils.py").load_module()
-
 
 list_of_documents = ['historico', 'boletim', 'boa', 'crid',
                      'regularmente_matriculado', 'bolsista', 'cotista', 'declaracao_passe_livre']
@@ -19,16 +16,6 @@ def is_dm(ctx, dm_channel):
 def is_valid_document(doc_type):
     if doc_type.lower() not in list_of_documents:
         return False
-    return True
-
-
-def is_pdf(file_path):
-    if(file_path == ""):
-        return False
-
-    if pdf_utils.is_not_pdf(file_path):
-        return False
-
     return True
 
 

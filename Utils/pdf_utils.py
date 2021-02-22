@@ -7,6 +7,16 @@ def create_directory(directory_name):
         os.makedirs(directory_name)
 
 
+def is_valid_file_path(file_path):
+    if(file_path == ""):
+        return False
+
+    if is_not_pdf(file_path):
+        return False
+
+    return True
+
+
 def is_not_pdf(path):
     try:
         with open(path, "rb") as pdf:
