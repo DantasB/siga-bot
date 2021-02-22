@@ -3,7 +3,7 @@ import traceback
 
 import discord
 from discord.ext import commands
-from Utils import discord_utils
+from SharedLibrary import discord_utils
 
 
 class ErrorHandler(commands.Cog):

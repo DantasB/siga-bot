@@ -1,7 +1,7 @@
 import requests
 
-import pdf_utils
-import siga_utils
+from SharedLibrary import pdf_utils
+from SharedLibrary import siga_utils
 
 portal_uri = "https://gnosys.ufrj.br"
 
@@ -55,7 +55,7 @@ def download_documents(cookies, doc_type, pdf_folder_path):
 
 def get_document_from_siga(login, password, username, doc_type):
 
-    directory_name = "documents/" + username + "/"
+    directory_name = "Documents/" + username + "/"
 
     pdf_utils.create_directory(directory_name)
 

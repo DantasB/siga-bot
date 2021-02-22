@@ -6,7 +6,7 @@ from datetime import datetime
 import discord
 from discord.ext import commands
 
-from Utils import *
+from SharedLibrary import *
 
 bot = commands.Bot(command_prefix=os.getenv('PREFIX'), help_command=None)
 

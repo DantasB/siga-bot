@@ -2,7 +2,9 @@ from datetime import datetime
 
 import discord
 from discord.ext import commands
-from Utils import *
+from Program.SharedLibrary import *
+
+import siga_core
 
 
 class SigaHandler(commands.Cog):
