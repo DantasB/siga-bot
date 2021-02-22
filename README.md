@@ -1,8 +1,8 @@
  # DiscordBot.py
 
-A simple Discord bot constructed using Python 3 and some other libraries made by Bruno Dantas.
+A simple Discord bot constructed using Python3 and some other libraries made by Bruno Dantas.
 
-Siga Bot is an original Discord bot written in Python 3, using the discord.py library. The objective is to access the UFRJ Siga and download some documents.
+Siga Bot is an original Discord bot written in Python3, using the discord.py library. The objective is to access the UFRJ Siga and download some documents.
 
 
 ## Important 
@@ -17,7 +17,7 @@ Setting up Betina is a no-brainer, just follow the guide below:
 4. Run the [siga_bot.py](https://github.com/DantasB/Siga-Bot/blob/main/siga_bot.py);
 
 ### Commands
-- $document <Login> <Password> <Type Of Document> => downloads the required document and sends it to your discord;
+- !document <Login> <Password> <Type Of Document> => downloads the required document and sends it to your discord;
 
 
 ### To get introduced
