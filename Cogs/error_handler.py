@@ -4,8 +4,7 @@ import math
 
 from discord.ext import commands
 from importlib.machinery import SourceFileLoader
-discord_utils = SourceFileLoader(
-    "discord_utils", "Utils/discord_utils.py").load_module()
+from Utils import discord_utils
 
 
 class ErrorHandler(commands.Cog):

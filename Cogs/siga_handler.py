@@ -4,11 +4,7 @@ import siga_core
 from datetime import datetime
 from discord.ext import commands
 from importlib.machinery import SourceFileLoader
-siga_utils = SourceFileLoader(
-    "siga_utils", "Utils/siga_utils.py").load_module()
-pdf_utils = SourceFileLoader("pdf_utils", "Utils/pdf_utils.py").load_module()
-discord_utils = SourceFileLoader(
-    "discord_utils", "Utils/discord_utils.py").load_module()
+from Utils import *
 
 
 class SigaHandler(commands.Cog):
@@ -24,7 +20,7 @@ class SigaHandler(commands.Cog):
         file_path = siga_core.get_document_from_siga(
             login, password, str(ctx.author), doc_type.lower())
 
-        if not discord_utils.is_pdf(file_path):
+        if not pdf_utils.is_pdf(file_path):
             raise commands.CheckFailure
 
         await ctx.send(file=discord.File(file_path))

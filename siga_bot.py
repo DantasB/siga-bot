@@ -3,16 +3,10 @@ import time
 import siga_core
 import discord
 import pathlib
+from Utils import *
 
 from datetime import datetime
 from discord.ext import commands
-from importlib.machinery import SourceFileLoader
-siga_utils = SourceFileLoader(
-    "siga_utils", "Utils/siga_utils.py").load_module()
-pdf_utils = SourceFileLoader("pdf_utils", "Utils/pdf_utils.py").load_module()
-discord_utils = SourceFileLoader(
-    "discord_utils", "Utils/discord_utils.py").load_module()
-
 
 bot = commands.Bot(command_prefix=os.getenv('PREFIX'), help_command=None)
 
