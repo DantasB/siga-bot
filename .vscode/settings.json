@@ -1,0 +1,6 @@
+{
+    "python.pythonPath": "/home/oracle/Documentos/Git Projects/Siga Bot/virtual_env/bin/python3.9",
+    "[python]": {
+        "editor.formatOnSave": true
+    }
+}
