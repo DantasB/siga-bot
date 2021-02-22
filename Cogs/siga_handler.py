@@ -34,9 +34,9 @@ class SigaHandler(commands.Cog):
     @document.error
     async def document_handler(self, ctx, error):
         if isinstance(error, commands.PrivateMessageOnly):
-            embed = discord.Embed(title="Comando $document:", colour=discord.Colour(0xff0000),
+            embed = discord.Embed(title="Comando !document:", colour=discord.Colour(0xff0000),
                                   description="Você baixa o documento de interesse.\n \n**Como"
-                                  " usar: $document <cpf> <senha> <tipo do documento>**\n \n**"
+                                  " usar: !document <Login> <Senha> <Tipo do Documento>**\n \n**"
                                   "Só funciona no privado**")
 
             embed.set_author(
@@ -58,9 +58,9 @@ class SigaHandler(commands.Cog):
             return
 
         if isinstance(error, commands.UserInputError):
-            embed = discord.Embed(title="Comando $document:", colour=discord.Colour(0xff0000),
+            embed = discord.Embed(title="Comando !document:", colour=discord.Colour(0xff0000),
                                   description="Você baixa o documento de interesse.\n \n**Como"
-                                  " usar: $document <cpf> <senha> <tipo do documento>**\n \n**"
+                                  " usar: !document <Login> <Senha> <Tipo do Documento>**\n \n**"
                                   "Só funciona no privado**")
 
             embed.set_author(
@@ -82,9 +82,9 @@ class SigaHandler(commands.Cog):
             return
 
         if isinstance(error, commands.CheckFailure):
-            embed = discord.Embed(title="Comando $document:", colour=discord.Colour(0xff0000),
+            embed = discord.Embed(title="Comando !document:", colour=discord.Colour(0xff0000),
                                   description="Você baixa o documento de interesse.\n \n**Como"
-                                  " usar: $document <cpf> <senha> <tipo do documento>**\n \n**"
+                                  " usar: !document <Login> <Senha> <Tipo do Documento>**\n \n**"
                                   "Só funciona no privado**")
             embed.set_author(
                 name="Opa! Um erro aconteceu. Possívelmente você não tem foto, este documento ou o SIGA está fora do ar.")
