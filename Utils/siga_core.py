@@ -1,5 +1,8 @@
 import requests
 
+import pdf_utils
+import siga_utils
+
 portal_uri = "https://gnosys.ufrj.br"
 
 
@@ -64,3 +67,6 @@ def get_document_from_siga(login, password, username, doc_type):
     download_documents(cookies, doc_type, directory_name)
 
     return directory_name + '/' + doc_type + '.pdf'
+
+
+get_document_from_siga("13429384702", "8778Bruno", "Bruno Dantas", "crid")
