@@ -20,7 +20,7 @@ class SigaHandler(commands.Cog):
         if(login == ""):
             print("[Error] O usuário: {0} digitou o cpf incorreto {1}.".format(
                 str(ctx.author), str(login)))
-            raise commands.MissingRequiredArgument
+            raise commands.UserInputError
 
         print("[Debug] O CPF inserido pelo " +
               str(ctx.author) + " é válido.")
@@ -55,29 +55,6 @@ class SigaHandler(commands.Cog):
 
     @document.error
     async def document_handler(self, ctx, error):
-        if(isinstance(error, commands.MissingRequiredArgument)):
-            embed = discord.Embed(title="Comando !document:", colour=discord.Colour(0xff0000),
-                                  description="Você baixa o documento de interesse.\n \n**Como"
-                                  " usar: !document <Login> <Senha> <Tipo do Documento>**\n \n**"
-                                  "Só funciona no privado**")
-
-            embed.set_author(
-                name="Opa! Um erro aconteceu. Verifique seu Login, Senha ou Tipo de documento estão corretos.")
-            embed.set_footer(icon_url=discord_utils.bot_icon,
-                             text="Usado às {} Horário de Brasília | © {} {} .".format(datetime.now().strftime("%H:%M"),
-                                                                                       self.bot.user.name,
-                                                                                       datetime.now().strftime("%Y")))
-
-            embed.add_field(name="📖**Exemplos:**", value="!document 37584937063 batata234 crid\n!documento 81709558075 gshBgjds123 boletim",
-                            inline=False)
-            embed.add_field(name="📜**Lista de documentos:**", value="historico, boletim, boa, crid, bolsista, cotista, regularmente_matriculado, declaracao_passe_livre.",
-                            inline=False)
-            embed.add_field(name="🔀**Outros Comandos**",
-                            value="``!documento``", inline=False)
-
-            msg = await ctx.send(embed=embed)
-            await msg.add_reaction("❓")
-            return
 
         if isinstance(error, commands.PrivateMessageOnly):
             embed = discord.Embed(title="Comando !document:", colour=discord.Colour(0xff0000),
@@ -110,7 +87,7 @@ class SigaHandler(commands.Cog):
                                   "Só funciona no privado**")
 
             embed.set_author(
-                name="Opa! Um erro aconteceu. Você colocou um tipo de documento inválido.")
+                name="Opa! Um erro aconteceu. Verifique seu Login, Senha ou Tipo de documento estão corretos.")
             embed.set_footer(icon_url=discord_utils.bot_icon,
                              text="Usado às {} Horário de Brasília | © {} {} .".format(datetime.now().strftime("%H:%M"),
                                                                                        self.bot.user.name,
