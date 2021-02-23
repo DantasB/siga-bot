@@ -12,10 +12,12 @@ class ErrorHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
-        ignored = (commands.CommandNotFound)
         error = getattr(error, 'original', error)
 
-        if isinstance(error, ignored):
+        print("[Warn] O erro: {0} acabou de acontecer para o usuário {1}.".format(
+            str(error), str(ctx.author)))
+
+        if isinstance(error, commands.CommandNotFound):
             comandos = [x for x in self.bot.all_commands]
             possiveis = []
             possivel = str(error).split(' ')[1]

@@ -14,20 +14,39 @@ class SigaHandler(commands.Cog):
     @commands.dm_only()
     @commands.command(name='document', aliases=['documento'])
     async def document(self, ctx, login, password, doc_type):
+        print("[Debug] " + str(ctx.author) +
+              " acabou de chamar o comando document.")
+
         if not discord_utils.is_valid_document(doc_type):
+            print("[Warn] O usuário: {0} digitou o seguinte doc_type {1}.".format(
+                str(ctx.author), str(doc_type)))
             raise commands.UserInputError
 
-        msg = await ctx.send("Aguarde! Estou baixando seu documento.")
+        print("[Debug] O " + doc_type + " do " +
+              str(ctx.author) + " acabou de ser validado.")
 
+        msg = await ctx.send("Aguarde! Estou baixando seu documento.")
+        print("[Debug] O " + doc_type + " do " +
+              str(ctx.author) + " acabou de ser baixado.")
         file_path = await siga_core.get_document_from_siga(
             login, password, str(ctx.author), doc_type.lower())
 
         if not pdf_utils.is_valid_file_path(file_path):
+            print("[Warn] O usuário: {0} tentou baixar o seguinte doc_type {1} mas não conseguiu.".format(
+                str(ctx.author), str(doc_type)))
             raise commands.CheckFailure
 
+        print("[Debug] O " + doc_type + " do " +
+              str(ctx.author) + " acabou de ser validado.")
+
         await ctx.send(file=discord.File(file_path))
+        print("[Debug] O " + doc_type + " do " +
+              str(ctx.author) + " acabou de ser enviado.")
 
         pdf_utils.delete_document(file_path)
+
+        print("[Debug] O " + doc_type + " do " +
+              str(ctx.author) + " acabou de ser apagado.")
 
     @document.error
     async def document_handler(self, ctx, error):
