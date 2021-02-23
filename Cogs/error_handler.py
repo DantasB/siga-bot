@@ -12,10 +12,11 @@ class ErrorHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
+
         error = getattr(error, 'original', error)
 
-        print("[Warn] O erro: {0} acabou de acontecer para o usuário {1}.".format(
-            str(error), str(ctx.author)))
+        print("[Error] Um erro acabou de acontecer para o usuário {0}.".format(
+            str(ctx.author)))
 
         if isinstance(error, commands.CommandNotFound):
             comandos = [x for x in self.bot.all_commands]
@@ -61,10 +62,6 @@ class ErrorHandler(commands.Cog):
             message = f"**Vamos com calma, " \
                 f"apressadinho. Tente novamente em** ``{math.ceil(error.retry_after)}`` **segundos.**"
             return await ctx.send(message)
-
-        elif isinstance(error, commands.MissingRequiredArgument):
-            await ctx.message.add_reaction("❌")
-            return await ctx.send('**Por favor insira os argumentos adequados.**')
 
         elif isinstance(error, commands.TooManyArguments):
             await ctx.message.add_reaction("❌")
