@@ -15,4 +15,5 @@ soupsieve==2.2
 toml==0.10.2
 typing-extensions==3.7.4.3
 urllib3==1.26.3
+validate-docbr==1.8.2
 yarl==1.6.3
