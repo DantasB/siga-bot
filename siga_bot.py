@@ -13,6 +13,19 @@ bot = commands.Bot(command_prefix=os.getenv('PREFIX'), help_command=None)
 requirements = ["error_handler", "siga_handler"]
 
 
+@bot.event
+async def on_ready():
+    print('--------------BD--------------')
+    print('BOT ONLINE')
+    print('Nome do Bot: ' + bot.user.name)
+    print('ID do Bot: ' + str(bot.user.id))
+    print('Versao do Discord: ' + discord.__version__)
+    print('--------------BD--------------')
+    game = discord.Game(f"!help | atualmente em {str(len(bot.guilds))} serve"
+                        f"rs com {str(len(set(bot.users)))} usuários!")
+    await bot.change_presence(status=discord.Status.online, activity=game)
+
+
 @bot.command(name='help', aliases=['h', 'ajuda'])
 async def help(ctx):
     embed = discord.Embed(title="Olá, Posso ajudar?", colour=discord.Colour(0xff0000),
