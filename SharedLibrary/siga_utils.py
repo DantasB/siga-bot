@@ -45,7 +45,6 @@ def siga_document_post_data(doc_type):
 
 
 def treat_login(login):
-    cpf = CPF()
-    if(not cpf.validate(login)):
+    if(not CPF().validate(login)):
         return ""
     return login.replace(".", "").replace("-", "")
