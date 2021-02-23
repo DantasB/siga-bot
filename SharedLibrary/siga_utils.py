@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from validate_docbr import CPF
 
 list_of_documents = {'historico': {'botaoHistorico': 'botaoHistorico'},
                      'boletim': {'botaoBoletim': 'botaoBoletim'},
@@ -41,3 +42,10 @@ def siga_document_post_data(doc_type):
         "autoScroll": "",
         "javax.faces.ViewState": "j_id1"
     } | list_of_documents[doc_type]
+
+
+def treat_login(login):
+    cpf = CPF()
+    if(not cpf.validate(login)):
+        return ""
+    return login.replace(".", "").replace("-", "")
