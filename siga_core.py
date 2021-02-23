@@ -1,63 +1,52 @@
-import requests
-
+import asyncio
+import aiohttp
 from SharedLibrary import pdf_utils
 from SharedLibrary import siga_utils
 
 portal_uri = "https://gnosys.ufrj.br"
 
 
-def access_siga(username, password):
-    with requests.Session() as session:
+async def access_siga(username, password):
+    async with aiohttp.ClientSession(cookie_jar=aiohttp.CookieJar()) as session:
         # Access CAS website
         cas_url = 'https://intranetauxiliar.ufrj.br/LoginUfrj/redireciona/?url_redir=https%3A%2F%2Fsiga.ufrj.br%2Fsira%2Fintranet%2FLoginIntranet.jsp%3FidentificacaoUFRJ%3D%3Aidentificacao_ufrj%3A%26idSessao%3D%3Aid_sessao%3A'
-        login_page = session.get(cas_url)
+        login_page = await session.get(cas_url)
+        login_page_content = await login_page.read()
+        login = await session.post(login_page.url, data=siga_utils.get_login_post_data(
+            username, password, login_page_content.decode("utf-8")))
 
-        login = session.post(login_page.url, data=siga_utils.get_login_post_data(
-            username, password, login_page))
-
-        siga_response = session.get(portal_uri + "/Portal/auth.seam")
-
-        return siga_response.cookies
-
-
-def access_documents_page(cookies):
-    with requests.Session() as session:
-        # Set session cookies with the ones obtained in `login_to_siga`
-        session.cookies = cookies
-        # Go to the page just to wait for the redirect request
-        session.get(portal_uri + "/Documentos")
-        # Going here with the appropriate cookies return the desired page
-        resp = session.get(portal_uri + "/Documentos/auth.seam")
-
-        # We return the raw HTML of the page containing all the pdfs
-        # Reverse engineering is needed to select specific pdfs (it uses js to lazy load)
-        return resp.content.decode("utf-8")
+        siga_response = await session.get(portal_uri + "/Portal/auth.seam")
+        return session.cookie_jar
 
 
-def download_documents(cookies, doc_type, pdf_folder_path):
-    with requests.Session() as session:
-        # Set session cookies with the ones obtained in `login_to_siga`
-        session.cookies = cookies
+async def access_documents_page(cookies):
+    async with aiohttp.ClientSession(cookie_jar=cookies) as session:
+        await session.get(portal_uri + "/Documentos")
+        resp = await session.get(portal_uri + "/Documentos/auth.seam")
 
-        document = session.post(portal_uri + "/Documentos/certidoes/emitir",
-                                data=siga_utils.siga_document_post_data(
-                                    session, doc_type),
-                                allow_redirects=False)
+        resp_content = await resp.read()
+        return resp_content.decode("utf-8")
 
+
+async def download_documents(cookies, doc_type, pdf_folder_path):
+    async with aiohttp.ClientSession(cookie_jar=cookies) as session:
+        document = await session.post(portal_uri + "/Documentos/certidoes/emitir",
+                                      data=siga_utils.siga_document_post_data(
+                                          doc_type))
+        content = await document.read()
         pdf_path = pdf_folder_path + "/" + doc_type + ".pdf"
-        pdf_utils.save_document(session.get(
-            document._next.url).content, pdf_path)
+        pdf_utils.save_document(content, pdf_path)
 
 
-def get_document_from_siga(login, password, username, doc_type):
+async def get_document_from_siga(login, password, username, doc_type):
 
     directory_name = "Documents/" + username
 
     pdf_utils.create_directory(directory_name)
 
-    cookies = access_siga(login, password)
-
-    access_documents_page(cookies)
-    download_documents(cookies, doc_type, directory_name)
+    cookies = await access_siga(login, password)
+    await access_documents_page(cookies)
+    await download_documents(cookies, doc_type, directory_name)
 
     return directory_name + "/" + doc_type + '.pdf'
+

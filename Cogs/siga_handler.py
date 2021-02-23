@@ -17,7 +17,7 @@ class SigaHandler(commands.Cog):
         if not discord_utils.is_valid_document(doc_type):
             raise commands.UserInputError
 
-        file_path = siga_core.get_document_from_siga(
+        file_path = await siga_core.get_document_from_siga(
             login, password, str(ctx.author), doc_type.lower())
         print(file_path)
         if not pdf_utils.is_valid_file_path(file_path):
