@@ -9,20 +9,25 @@ from discord.ext import commands
 from Cogs import *
 from SharedLibrary import *
 
-bot = commands.Bot(command_prefix=os.getenv('PREFIX'), help_command=None)
+intents = discord.Intents.default()
+intents.members = True
+
+bot = commands.Bot(command_prefix=os.getenv('PREFIX'),
+                   help_command=None, intents=intents)
 requirements = ["error_handler", "siga_handler"]
 
 
 @bot.event
 async def on_ready():
+
     print('--------------BD--------------')
     print('BOT ONLINE')
     print('Nome do Bot: ' + bot.user.name)
     print('ID do Bot: ' + str(bot.user.id))
     print('Versao do Discord: ' + discord.__version__)
     print('--------------BD--------------')
-    game = discord.Game(f"!help | atualmente em {str(len(bot.guilds))} serve"
-                        f"rs com {str(len(bot.users))} usuários!")
+    game = discord.Game(f"!help | Atualmente em {str(len(bot.guilds))} serve"
+                        f"rs com {str(len(set(bot.get_all_members())))} usuários!")
     await bot.change_presence(status=discord.Status.online, activity=game)
 
 
