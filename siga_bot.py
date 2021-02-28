@@ -19,7 +19,8 @@ requirements = ["error_handler", "siga_handler"]
 
 @bot.event
 async def on_ready():
-
+    """ Prints information when the bot is ready
+    """
     print('--------------BD--------------')
     print('BOT ONLINE')
     print('Nome do Bot: ' + bot.user.name)
@@ -33,7 +34,11 @@ async def on_ready():
 
 @bot.command(name='help', aliases=['h', 'ajuda'])
 async def help(ctx):
+    """ Overrides the discord help method
 
+    Args:
+        ctx (object): main discord parameter, relates to the author and message
+    """
     print("[Debug] " + str(ctx.author) + " acabou de chamar o comando help")
 
     embed = discord.Embed(title="Olá, Posso ajudar?", colour=discord.Colour(0xff0000),
