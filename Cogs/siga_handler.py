@@ -8,12 +8,29 @@ import siga_core
 
 
 class SigaHandler(commands.Cog):
+    """ Cog that relates to the siga functions
+
+    """
+
     def __init__(self, bot):
         self.bot = bot
 
     @commands.dm_only()
     @commands.command(name='document', aliases=['documento'])
     async def document(self, ctx, login, password, doc_type):
+        """ Gets the user input and downloads the pdf related to the doc_type
+
+        Args:
+            ctx (object): main discord parameter, relates to the author and message
+            login (str): login (usually the cpf)
+            password (str): password to access the siga
+            doc_type (str): document to be downloaded in the page
+
+        Raises:
+            commands.UserInputError: login is not a valid cpf
+            commands.UserInputError: doc_type is not in the documents list
+            commands.CheckFailure: downloaded document is not a valid pdf
+        """
         print("[Debug] " + str(ctx.author) +
               " acabou de chamar o comando document.")
         login = siga_utils.treat_login(login)
@@ -55,7 +72,12 @@ class SigaHandler(commands.Cog):
 
     @document.error
     async def document_handler(self, ctx, error):
+        """ Every time that an error occur on document function, this function will be called
 
+        Args:
+            ctx (object): main discord parameter, relates to the author and message
+            error (object): error that ocurred 
+        """
         if isinstance(error, commands.PrivateMessageOnly):
             embed = discord.Embed(title="Comando !document:", colour=discord.Colour(0xff0000),
                                   description="Você baixa o documento de interesse.\n \n**Como"
