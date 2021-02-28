@@ -7,6 +7,15 @@ portal_uri = "https://gnosys.ufrj.br"
 
 
 async def access_siga(username, password):
+    """ Access the siga main page throught the intranet
+
+    Args:
+        username (str): login (usually the cpf)
+        password (str): password to access the siga
+
+    Returns:
+        cookie_jar: the request cookies
+    """
     async with aiohttp.ClientSession(cookie_jar=aiohttp.CookieJar()) as session:
         # Access CAS website
         cas_url = 'https://intranetauxiliar.ufrj.br/LoginUfrj/redireciona/?url_redir=https%3A%2F%2Fsiga.ufrj.br%2Fsira%2Fintranet%2FLoginIntranet.jsp%3FidentificacaoUFRJ%3D%3Aidentificacao_ufrj%3A%26idSessao%3D%3Aid_sessao%3A'
@@ -20,6 +29,14 @@ async def access_siga(username, password):
 
 
 async def access_documents_page(cookies):
+    """ Access the siga documents page
+
+    Args:
+        cookies (cookie_jar): the request cookies
+
+    Returns:
+        str: decoded html content
+    """
     async with aiohttp.ClientSession(cookie_jar=cookies) as session:
         await session.get(portal_uri + "/Documentos")
         resp = await session.get(portal_uri + "/Documentos/auth.seam")
@@ -29,6 +46,13 @@ async def access_documents_page(cookies):
 
 
 async def download_documents(cookies, doc_type, pdf_folder_path):
+    """ Download the wanted document by making a post
+
+    Args:
+        cookies (cookie_jar): the request cookies
+        doc_type (str): document to be downloaded in the page
+        pdf_folder_path (str): path where the pdf will be saved
+    """
     async with aiohttp.ClientSession(cookie_jar=cookies) as session:
         document = await session.post(portal_uri + "/Documentos/certidoes/emitir",
                                       data=siga_utils.siga_document_post_data(
@@ -39,7 +63,17 @@ async def download_documents(cookies, doc_type, pdf_folder_path):
 
 
 async def get_document_from_siga(login, password, username, doc_type):
+    """ A wrapper that acces every pages, download the pdf and returns the path where it's located
 
+    Args:
+        login (str): login (usually the cpf)
+        password (str): password to access the siga
+        username (str): discord person username
+        doc_type (str): document to be downloaded in the page
+
+    Returns:
+        str: path where the pdf is located
+    """
     directory_name = "Documents/" + username
 
     pdf_utils.create_directory(directory_name)

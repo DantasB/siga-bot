@@ -7,12 +7,22 @@ from SharedLibrary import discord_utils
 
 
 class ErrorHandler(commands.Cog):
+    """Cog related to the error handler
+
+    """
+
     def __init__(self, bot):
         self.bot = bot
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
+        """ Every time that an error occur, this function will be called
 
+        Args:
+            ctx (object): main discord parameter, relates to the author and message
+            error (object): error that ocurred 
+
+        """
         error = getattr(error, 'original', error)
 
         print("[Error] Um erro acabou de acontecer para o usuário {0}.".format(
