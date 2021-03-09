@@ -10,7 +10,7 @@ This bot is only compatible with the discord.py rewrite library. Any other disco
 
 
 ### Setup
-Setting up Betina is a no-brainer, just follow the guide below:
+Setting up Siga Bot is a no-brainer, just follow the guide below:
 1. Download all the files.
 2. Install all the libraries located at the [requirements.txt](requirements.txt);
 3. Acess the https://discordapp.com/developers/applications/ and create your own bot to get your credentials;
