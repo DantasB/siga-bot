@@ -3,7 +3,7 @@ import os
 import PyPDF2
 
 
-def create_directory(directory_name):
+def create_directory(directory_name: str) -> None:
     """ Creates a directory with the name
 
     Args:
@@ -13,7 +13,7 @@ def create_directory(directory_name):
         os.makedirs(directory_name)
 
 
-def is_valid_file_path(file_path):
+def is_valid_file_path(file_path: str) -> bool:
     """ Check if the pdf path is valid
 
     Args:
@@ -31,7 +31,7 @@ def is_valid_file_path(file_path):
     return True
 
 
-def is_not_pdf(path):
+def is_not_pdf(path: str) -> bool:
     """ Tries to open the pdf and check if it's valid or not
 
     Args:
@@ -48,7 +48,7 @@ def is_not_pdf(path):
         return True
 
 
-def save_document(html_content, path):
+def save_document(html_content: str, path: str) -> None:
     """ writes the document bytes in the path
 
     Args:
@@ -59,7 +59,7 @@ def save_document(html_content, path):
         f.write(html_content)
 
 
-def delete_document(file_path):
+def delete_document(file_path: str) -> None:
     """ Deletes the document from the file_path
 
     Args:

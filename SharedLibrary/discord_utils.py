@@ -1,12 +1,15 @@
 from difflib import SequenceMatcher
 
-list_of_documents = ['historico', 'boletim', 'boa', 'crid',
-                     'regularmente_matriculado', 'bolsista', 'cotista', 'declaracao_passe_livre']
+import discord
+from discord.ext import commands
 
-bot_icon = "https://cdn.discordapp.com/attachments/539836343094870016/813096168799207454/minerva.png"
+DOCUMENTS_LIST = ['historico', 'boletim', 'boa', 'crid',
+                  'regularmente_matriculado', 'bolsista', 'cotista', 'declaracao_passe_livre']
+
+BOT_ICON = "https://cdn.discordapp.com/attachments/539836343094870016/813096168799207454/minerva.png"
 
 
-def is_dm(ctx, dm_channel):
+def is_dm(ctx: discord.ext.commands.Context, dm_channel: discord.DMChannel) -> bool:
     """ Checks if the user is sending a message on dm
 
     Args:
@@ -22,7 +25,7 @@ def is_dm(ctx, dm_channel):
     return False
 
 
-def is_valid_document(doc_type):
+def is_valid_document(doc_type: str) -> bool:
     """ Checks if the doc_type parameter is valid
 
     Args:
@@ -31,12 +34,12 @@ def is_valid_document(doc_type):
     Returns:
         bool: True if it's valid
     """
-    if doc_type.lower() not in list_of_documents:
+    if doc_type.lower() not in DOCUMENTS_LIST:
         return False
     return True
 
 
-def similar(a, b):
+def similar(element_a: str, element_b: str) -> float:
     """ Checks how similar is a str from another
 
     Args:
@@ -46,4 +49,4 @@ def similar(a, b):
     Returns:
         float: ratio in how similar are the strings
     """
-    return SequenceMatcher(None, a, b).ratio()
+    return SequenceMatcher(None, element_a, element_b).ratio()
