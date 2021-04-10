@@ -3,24 +3,25 @@ import traceback
 
 import discord
 from discord.ext import commands
-from SharedLibrary import discord_utils
+from SharedLibrary.discord_utils import similar
 
 
 class ErrorHandler(commands.Cog):
     """Cog related to the error handler
-
+        Args:
+            bot (commands.Bot): the discord bot that will load the Cog
     """
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_command_error(self, ctx, error):
+    async def on_command_error(self, ctx: commands.Context, error: discord.DiscordException) -> None:
         """ Every time that an error occur, this function will be called
 
-        Args:
-            ctx (object): main discord parameter, relates to the author and message
-            error (object): error that ocurred 
+            Args:
+                ctx (commands.Context): main discord parameter, relates to the author and message
+                error (discord.DiscordException): error that ocurred 
 
         """
         error = getattr(error, 'original', error)
@@ -33,7 +34,7 @@ class ErrorHandler(commands.Cog):
             possiveis = []
             possivel = str(error).split(' ')[1]
             for comando in comandos:
-                if discord_utils.similar(possivel, comando) > 0.4:
+                if similar(possivel, comando) > 0.4:
                     possiveis.append(comando)
             if not possiveis:
                 await ctx.message.add_reaction("❌")
@@ -78,5 +79,5 @@ class ErrorHandler(commands.Cog):
             return await ctx.send("**Você colocou argumentos demais nessa função.**")
 
 
-def setup(bot):
+def setup(bot: commands.Bot) -> None:
     bot.add_cog(ErrorHandler(bot))

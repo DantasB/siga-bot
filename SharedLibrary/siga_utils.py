@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from validate_docbr import CPF
 
-list_of_documents = {'historico': {'botaoHistorico': 'botaoHistorico'},
+LIST_OF_DOCUMENTS = {'historico': {'botaoHistorico': 'botaoHistorico'},
                      'boletim': {'botaoBoletim': 'botaoBoletim'},
                      'boa': {'j_id123': 'j_id123'}, 'crid': {'j_id127': 'j_id127'},
                      'regularmente_matriculado': {'j_id103:0:j_id104': 'j_id103:0:j_id104'},
@@ -10,7 +10,7 @@ list_of_documents = {'historico': {'botaoHistorico': 'botaoHistorico'},
                      'declaracao_passe_livre': {'j_id103:4:j_id104': 'j_id103:4:j_id104'}}
 
 
-def get_enrolled_page_token(html_content):
+def get_enrolled_page_token(html_content: str) -> str:
     """ Get the page token
 
     Args:
@@ -24,7 +24,7 @@ def get_enrolled_page_token(html_content):
     return soup.find("span", {"id": "token"}).text
 
 
-def get_login_post_data(username, password, html_content):
+def get_login_post_data(username: str, password: str, html_content: str) -> dict:
     """ Generate the post data to be used on login
 
     Args:
@@ -42,7 +42,7 @@ def get_login_post_data(username, password, html_content):
     return postData
 
 
-def get_authenticity_token_parameter(html_content):
+def get_authenticity_token_parameter(html_content: str) -> str:
     """ Get the authenticity token
 
     Args:
@@ -55,7 +55,7 @@ def get_authenticity_token_parameter(html_content):
     return soup.find("input", {"name": "authenticity_token"})["value"]
 
 
-def get_lt_parameter(html_content):
+def get_lt_parameter(html_content: str) -> str:
     """ Get the lt parameter
 
     Args:
@@ -68,23 +68,23 @@ def get_lt_parameter(html_content):
     return soup.find("input", {"id": "lt"})["value"]
 
 
-def siga_document_post_data(doc_type):
+def siga_document_post_data(doc_type: str) -> dict:
     """ Generate the post data to be used on pdf download
 
     Args:
         doc_type (str): document to be downloaded in the page
     Returns:
-        dictionary: post data
+        dict: post data
     """
     return {
         "gnosys-decor-vis-seletor-matricula-aluno": "0",
         "gnosys-decor-vis-seletor-matricula-form": "gnosys-decor-vis-seletor-matricula-form",
         "autoScroll": "",
         "javax.faces.ViewState": "j_id1"
-    } | list_of_documents[doc_type]
+    } | LIST_OF_DOCUMENTS[doc_type]
 
 
-def treat_login(login):
+def treat_login(login: str) -> str:
     """ Checks if the login is a valid cpf
 
     Args:
