@@ -12,7 +12,7 @@ from SharedLibrary.discord_utils import BOT_ICON
 INTENTS = discord.Intents.default()
 INTENTS.members = True
 
-BOT = commands.Bot(command_prefix=os.getenv('PREFIX'),
+BOT = commands.Bot(command_prefix=os.getenv('PREFIX') or '!',
                    help_command=None, intents=INTENTS)
 REQUIREMENTS = ["error_handler", "siga_handler"]
 
@@ -27,7 +27,7 @@ async def on_ready() -> None:
     print('ID do Bot: ' + str(BOT.user.id))
     print('Versao do Discord: ' + discord.__version__)
     print('--------------BD--------------')
-    game = discord.Game(f"!help | Atualmente em {str(len(BOT.guilds))} serve"
+    game = discord.Game(f"{os.getenv('PREFIX') or '!'}help | Atualmente em {str(len(BOT.guilds))} serve"
                         f"rs com {str(len(set(BOT.get_all_members())))} usuários!")
     await BOT.change_presence(status=discord.Status.online, activity=game)
 
