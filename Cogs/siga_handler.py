@@ -57,9 +57,9 @@ class SigaHandler(commands.Cog):
         file_path = await siga_core.get_document_from_siga(
             login, password, str(ctx.author), doc_type.lower())
 
-        print("[Error] O usuário: {0} tentou baixar o seguinte doc_type {1} mas não conseguiu. Algum erro aconteceu na requisição.".format(
-            str(ctx.author), str(doc_type)))
         if not is_valid_file_path(file_path):
+            print("[Error] O usuário: {0} tentou baixar o seguinte doc_type {1} mas não conseguiu. Algum erro aconteceu na requisição.".format(
+                str(ctx.author), str(doc_type)))
             raise commands.CheckFailure
 
         print("[Debug] O " + str(doc_type) +
