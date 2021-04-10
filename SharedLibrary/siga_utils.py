@@ -32,7 +32,7 @@ def get_login_post_data(username: str, password: str, html_content: str) -> dict
         password (str): password to access the siga
         html_content (str): the page html
     Returns:
-        dictionary: post data
+        dict: post data
     """
     postData = {'authenticity_token': get_authenticity_token_parameter(html_content),
                 'lt': get_lt_parameter(html_content),
