@@ -17,7 +17,7 @@ BOT = commands.Bot(command_prefix=os.getenv('PREFIX') or '!',
 REQUIREMENTS = ["error_handler", "siga_handler"]
 
 
-@ BOT.event
+@BOT.event
 async def on_ready() -> None:
     """ Prints information when the bot is ready
     """
@@ -32,7 +32,7 @@ async def on_ready() -> None:
     await BOT.change_presence(status=discord.Status.online, activity=game)
 
 
-@ BOT.command(name='help', aliases=['h', 'ajuda'])
+@BOT.command(name='help', aliases=['h', 'ajuda'])
 async def help(ctx: commands.Context) -> None:
     """ Overrides the discord help method
 
