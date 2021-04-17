@@ -48,7 +48,7 @@ $ touch .env
 
 # Create the following parameters
  TOKEN #Your discord bot token
- PREFIX #Your bot prefix if you want any differente from "!"
+ PREFIX #Your bot prefix if you want any different from "!"
 
 # Execute the main program
 $ python siga_bot.py
